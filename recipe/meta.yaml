@@ -1,5 +1,5 @@
 {% set versions = {
-    "0.0.0": "REPLACE_WITH_SHA256"
+    "20251114": "d1bf94fd9403043f0c5f3b8bb6d9b79d6108f07c19d8b7403de0acd66774f8af"
 } %}
 
 {% set version = environ.get('COMMIT_VERSION', None) %}
@@ -13,7 +13,7 @@ package:
   version: {{ environ.get('ANACONDA_VERSION', version)|replace("-", ".") }}
 
 source:
-  url: "https://github.com/mnovak42/g4hepem/archive/refs/tags/{{ version }}.tar.gz"   # TODO: confirm upstream's actual tag/tarball naming
+  url: "https://github.com/mnovak42/g4hepem/archive/refs/tags/{{ version }}.tar.gz"
   {% if versions.get(version, None) %}
   sha256: {{ versions.get(version) }}
   {% endif %}
@@ -31,18 +31,30 @@ requirements:
     - cmake
     - make
   host:
-    # TODO: library dependencies
+    # currently only satisfiable from the hep-forge "eic" label -- this
+    # feedstock's own .github/workflows/autoupload.yml adds that channel
+    # (scripts/templates/autoupload.yml deliberately does not, most
+    # feedstocks don't need it).
+    - geant >=10.6
   run:
-    # TODO: runtime dependencies
+    - geant >=10.6
 
 test:
   commands:
-    - echo "TODO: a real smoke test"
+    - test -f "${PREFIX}/include/G4HepEm/G4HepEmRun.hh"
+    - test -f "${PREFIX}/lib/cmake/G4HepEm/G4HepEmConfig.cmake"
 
 about:
   home: "https://github.com/mnovak42/g4hepem"
+  dev_url: "https://github.com/mnovak42/g4hepem"
   license: "Apache-2.0"
-  summary: "Fast, vectorized Geant4 electromagnetic physics processes (dd4hep +g4hepem dependency)"
+  summary: "Fast, vectorized Geant4 electromagnetic physics processes"
+  description: |
+    G4HepEm provides fast, vectorization-friendly implementations of
+    Geant4's standard electromagnetic physics processes, used as an
+    optional plugin by DD4hep (+g4hepem) for EIC detector simulation.
+    Built here against hep-forge's "geant" package (eic label, the EIC
+    eAST-physics-list Geant4 fork).
 
 extra:
   recipe-maintainers:
