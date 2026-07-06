@@ -41,7 +41,7 @@ requirements:
 
 test:
   commands:
-    - test -f "${PREFIX}/include/G4HepEm/G4HepEmRun.hh"
+    - test -f "${PREFIX}/include/G4HepEm/G4HepEmRunManager.hh"
     - test -f "${PREFIX}/lib/cmake/G4HepEm/G4HepEmConfig.cmake"
 
 about:
