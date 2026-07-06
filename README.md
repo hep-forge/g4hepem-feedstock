@@ -9,7 +9,17 @@ Feedstock for [g4hepem](https://github.com/mnovak42/g4hepem) — part of [hep-fo
 Builds linux-amd64 + linux-arm64 in one matrix workflow and uploads to the
 [hep-forge](https://anaconda.org/hep-forge) Anaconda channel.
 
-Fast, vectorized Geant4 electromagnetic physics processes (dd4hep +g4hepem dependency)
+Fast, vectorized Geant4 electromagnetic physics processes
+
+## Architectures
+
+| Architecture | Latest published |
+|--------------|------------------|
+| linux-amd64 (`linux-64`) | ✅ `20251114` |
+| linux-arm64 (`linux-aarch64`) | ✅ `20251114` |
+
+_As of the last feedstock render; the badges above are live._
+
 
 ## Install
 
@@ -20,3 +30,4 @@ conda install -c hep-forge -c conda-forge g4hepem
 ## Maintainers
 
 * [@meiyasan](https://github.com/meiyasan/)
+
